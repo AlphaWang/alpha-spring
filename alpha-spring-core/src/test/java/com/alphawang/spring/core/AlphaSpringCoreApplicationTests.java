@@ -1,11 +1,11 @@
-package com.alphawang.spring;
+package com.alphawang.spring.core;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class) @SpringBootTest public class ApplicationTests {
+@RunWith(SpringRunner.class) @SpringBootTest public class AlphaSpringCoreApplicationTests {
 
     @Test public void contextLoads() {
     }

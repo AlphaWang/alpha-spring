@@ -1,4 +1,4 @@
-package com.alphawang.spring.servlet;
+package com.alphawang.spring.core.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +26,11 @@ public class MyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
-        resp.getWriter().println("Hello Servlet!");
+        resp.getWriter().println(getMessage(12));
 
+    }
+    
+    public String getMessage(int number) {
+        return "Hello Servlet! " + number;
     }
 }
