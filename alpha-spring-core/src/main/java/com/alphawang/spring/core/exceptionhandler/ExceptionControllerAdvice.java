@@ -2,8 +2,12 @@ package com.alphawang.spring.core.exceptionhandler;
 
 import com.alphawang.spring.core.common.ResultVo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +47,18 @@ public class ExceptionControllerAdvice {
             .code(-3)
             .msg("Exception")
             .build();
+    }
+    
+    
+    
+    @InitBinder 
+    public void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.setDisallowedFields("id"); 
+    }
+    
+    @ModelAttribute
+    public void addAttributes(Model model) {
+        model.addAttribute("msg", "额外信息"); 
     }
 
     
