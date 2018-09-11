@@ -25,8 +25,9 @@ public class ScopeConfig implements WebMvcConfigurer {
         return new ExtendedSessionInterceptor();
     }
 
-    @Bean
-    @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS) SubSessionHolder subSessionHolder() {
-        return new SubSessionHolder();
-    }
+//    @Bean
+//    @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS) 
+//    SubSessionHolder subSessionHolder() {
+//        return new SubSessionHolder();
+//    }
 }
