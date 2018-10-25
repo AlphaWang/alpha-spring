@@ -1,4 +1,4 @@
-package com.alphawang.spring.core.feature;
+package com.alphawang.spring.core.feature.parametername;
 
 import com.alphawang.spring.core.servlet.MyServlet;
 import lombok.extern.slf4j.Slf4j;

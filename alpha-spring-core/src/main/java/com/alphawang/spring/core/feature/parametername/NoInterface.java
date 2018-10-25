@@ -1,4 +1,4 @@
-package com.alphawang.spring.core.feature;
+package com.alphawang.spring.core.feature.parametername;
 
 public class NoInterface {
     
