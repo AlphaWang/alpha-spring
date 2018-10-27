@@ -9,10 +9,12 @@ public class LifecycleCar {
     private int maxSpeed;
     
     public void init() {
+        System.out.println("...LifecycleCar.init() " + this.color + " > BLUE");
         this.color = "BLUE";
     }
     
     public void destroy() {
+        System.out.println("...LifecycleCar.destroy()");
         this.color = null;
     }
 }

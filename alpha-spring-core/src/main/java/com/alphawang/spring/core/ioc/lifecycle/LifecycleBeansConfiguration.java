@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LifecycleBeansConfiguration {
     
-    @Bean
+    @Bean(initMethod = "init", destroyMethod = "destroy")
     public LifecycleCar lifecycleCar() {
          LifecycleCar car = new LifecycleCar();
          car.setBrand("Audi");
