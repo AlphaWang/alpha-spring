@@ -20,4 +20,9 @@ public class LifecycleBeansConfiguration {
     public MyBeanFactoryPostProcessor myBeanFactoryPostProcessor() {
         return new MyBeanFactoryPostProcessor();
     }
+    
+    @Bean
+    public MyBeanPostProcessor myBeanPostProcessor() {
+        return new MyBeanPostProcessor();
+    }
 }
