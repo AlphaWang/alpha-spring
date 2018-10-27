@@ -1,6 +1,5 @@
-package com.alphawang.spring.core.ioc.bean.applicationcontext;
+package com.alphawang.spring.core.ioc.bean;
 
-import com.alphawang.spring.core.ioc.bean.Car;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

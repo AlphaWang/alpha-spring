@@ -1,6 +1,5 @@
-package com.alphawang.spring.core.ioc.bean.beanfactory;
+package com.alphawang.spring.core.ioc.bean;
 
-import com.alphawang.spring.core.ioc.bean.Car;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.Resource;
