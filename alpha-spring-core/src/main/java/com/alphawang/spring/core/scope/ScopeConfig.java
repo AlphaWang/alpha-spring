@@ -16,7 +16,7 @@ public class ScopeConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
 
         //添加拦截器
-        registry.addInterceptor(extendedSessionInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(extendedSessionInterceptor()).addPathPatterns("/scope/**");
         
     }
     

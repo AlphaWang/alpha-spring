@@ -1,6 +1,6 @@
 package com.alphawang.spring.core.feature.parametername;
 
-import com.alphawang.spring.core.servlet.MyServlet;
+import com.alphawang.spring.core.servlet.ServletDemo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
@@ -13,7 +13,7 @@ public class ParameterNameDiscovery {
     
     public static void main(String[] args) {
         printMethods(NoInterface.class);
-        printMethods(MyServlet.class);
+        printMethods(ServletDemo.class);
         
     }
     
