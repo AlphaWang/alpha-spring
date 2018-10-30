@@ -19,6 +19,8 @@ import java.io.IOException;
  * 3. 注册
  *      @ServletComponentScan(basePackages="")
  *      
+ * 访问 http://localhost:8081/hello/servlet     
+ *      
  */
 @WebServlet(urlPatterns = "/hello/servlet")
 public class MyServlet extends HttpServlet {
