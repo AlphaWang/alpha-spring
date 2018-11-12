@@ -1,9 +1,8 @@
-package com.alphawang.spring.core.profile;
+package com.alphawang.spring.core.ioc.profile;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 @Profile("Java8")

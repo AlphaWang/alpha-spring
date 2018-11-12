@@ -1,11 +1,11 @@
-package com.alphawang.spring.core.profile;
+package com.alphawang.spring.core.ioc.profile;
 
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
-@SpringBootApplication(scanBasePackages = "com.alphawang.spring.core.profile")
+@SpringBootApplication(scanBasePackages = "com.alphawang.spring.core.ioc.profile")
 public class CalculateServiceBootstrap {
 
     public static void main(String[] args) {
