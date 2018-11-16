@@ -6,3 +6,7 @@ org.springframework.context.ApplicationListener=\
 com.alphawang.spring.springboot.listener.ApplicationRefreshListener1,\
 com.alphawang.spring.springboot.listener.ApplicationRefreshListener2,\
 com.alphawang.spring.springboot.listener.MyConfigFileApplicationListener
+
+
+org.springframework.boot.SpringApplicationRunListener=\
+com.alphawang.spring.springboot.listener.run.MySpringApplicationRunListener  

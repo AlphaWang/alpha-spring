@@ -33,7 +33,7 @@ public class MyConfigFileApplicationListener implements SmartApplicationListener
              * 如果Order在 {@link ConfigFileApplicationListener} 之后： 
              * environment.getProperty("name") : alphawang.com
              */
-            System.out.println("environment.getProperty(\"name\") : " + environment.getProperty("name"));
+            System.out.println("===== environment.getProperty(\"name\") : " + environment.getProperty("name"));
         }
         if (event instanceof ApplicationPreparedEvent) {
         }
