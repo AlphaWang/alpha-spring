@@ -4,4 +4,5 @@ com.alphawang.spring.springboot.initializer.ApplicationContextInitializer1
 
 org.springframework.context.ApplicationListener=\
 com.alphawang.spring.springboot.listener.ApplicationRefreshListener1,\
-com.alphawang.spring.springboot.listener.ApplicationRefreshListener2  
+com.alphawang.spring.springboot.listener.ApplicationRefreshListener2,\
+com.alphawang.spring.springboot.listener.MyConfigFileApplicationListener
