@@ -18,4 +18,7 @@
     
     <aop:aspectj-autoproxy/>
     <bean class="com.alphawang.spring.core.aop.aspectj.introducction.IntroductionAspect"/>
+    
+    <bean class="com.alphawang.spring.core.aop.aspectj.AroundAspect"/>
+    <bean class="com.alphawang.spring.core.aop.aspectj.ArgsDemoAspect"/>
 </beans>
