@@ -1,4 +1,4 @@
-package com.alphawang.spring.mvc;
+package com.alphawang.spring.mvc.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
