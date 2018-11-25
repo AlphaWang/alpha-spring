@@ -1,4 +1,4 @@
-package com.alphawang.spring.springboot.async;
+package com.alphawang.spring.mvc.async;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

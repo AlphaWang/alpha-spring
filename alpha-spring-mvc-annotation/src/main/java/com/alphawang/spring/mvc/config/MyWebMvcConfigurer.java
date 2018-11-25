@@ -1,7 +1,11 @@
 package com.alphawang.spring.mvc.config;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -12,13 +16,15 @@ import org.springframework.web.servlet.view.JstlView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @EnableWebMvc 
  */
 @Configuration
 @EnableWebMvc
-public class WebMvcConfig implements WebMvcConfigurer {
+public class MyWebMvcConfigurer implements WebMvcConfigurer {
 
 //     <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
 //        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
@@ -44,6 +50,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 return false;
             }
         });
+    }
+    
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
+        List<MediaType> mediaTypes = new ArrayList<>();
+        mediaTypes.add(MediaType.APPLICATION_JSON);
+        mediaTypes.add(MediaType.TEXT_PLAIN);
+        mappingJackson2HttpMessageConverter.setSupportedMediaTypes(mediaTypes);
+        mappingJackson2HttpMessageConverter.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        converters.add(mappingJackson2HttpMessageConverter);
     }
     
 }
