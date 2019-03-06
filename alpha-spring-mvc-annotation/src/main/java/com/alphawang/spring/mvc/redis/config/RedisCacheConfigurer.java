@@ -1,17 +1,23 @@
 package com.alphawang.spring.mvc.redis.config;
 
+import com.alphawang.spring.mvc.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.CacheErrorHandler;
+import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.lang.reflect.Method;
 
 /**
  * without Spring-Boot
@@ -20,10 +26,22 @@ import org.springframework.data.redis.core.RedisTemplate;
 @EnableCaching
 public class RedisCacheConfigurer extends CachingConfigurerSupport {
 
+    @Override 
+    public KeyGenerator keyGenerator() {
+        return new KeyGenerator() {
+
+            @Override public Object generate(Object o, Method method, Object... objects) {
+                return method.getName();
+            }
+        };
+    }
+
     @Override
     public CacheErrorHandler errorHandler() {
         return new MyCacheErrorHandler();
     }
+    
+    
     
     @Bean
     public JedisConnectionFactory redisConnectionFactory() {
@@ -38,6 +56,8 @@ public class RedisCacheConfigurer extends CachingConfigurerSupport {
     public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory cf) {
         RedisTemplate<String, String> redisTemplate = new RedisTemplate<String, String>();
         redisTemplate.setConnectionFactory(cf);
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(User.class)); //TODO not flexible
         return redisTemplate;
     }
 
@@ -47,6 +67,7 @@ public class RedisCacheConfigurer extends CachingConfigurerSupport {
 
         // Number of seconds before expiration. Defaults to unlimited (0)
         cacheManager.setDefaultExpiration(300);
+        cacheManager.setUsePrefix(true);
         return cacheManager;
     }
     
