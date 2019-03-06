@@ -8,15 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Prerequisite
+ * 1. run redis on localhost 6379
+ */
 @Slf4j
 @RestController
 public class RedisCacheController {
 
     @RequestMapping(value = "/redis-cache/{key:[0-9]+}", method = RequestMethod.GET)
-    @Cacheable(value = "post-single", key = "#key")
+    @Cacheable(value = "cached-user", key = "#key", unless = "#result.id > 10")
     public User cache(@PathVariable(value = "key") String key) {
 
-        log.warn("-------------MOCK redis for {}", key);
+        log.warn("------------- MOCK redis for {}", key);
         return User.builder()
             .id(Long.valueOf(key))
             .name("mock user.")
