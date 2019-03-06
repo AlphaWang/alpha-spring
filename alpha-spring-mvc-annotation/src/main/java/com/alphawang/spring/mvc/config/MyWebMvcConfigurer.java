@@ -1,5 +1,6 @@
 package com.alphawang.spring.mvc.config;
 
+import com.alphawang.spring.mvc.redis.config.EnableRedisCache;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,7 @@ import java.util.List;
  * @EnableWebMvc 
  */
 @Configuration
+@EnableRedisCache
 @EnableWebMvc
 public class MyWebMvcConfigurer implements WebMvcConfigurer {
 
