@@ -47,7 +47,7 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
             @Override 
             public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
                 System.out.println("---- WebMvcConfig.interceptor...");
-                return false;
+                return true;
             }
         });
     }
