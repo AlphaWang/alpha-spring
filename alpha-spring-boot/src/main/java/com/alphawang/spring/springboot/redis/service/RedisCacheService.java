@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class RedisCacheService {
 
 //    @Cacheable(value = "cached-user", key = "#redisRequest.key", unless = "#result.testId > 10")
-    @Cacheable(value = "cached-user", key = "#redisRequest.key", condition = "#redisRequest.testId != null && #redisRequest.testId < 10")
+    @Cacheable(value = "cached-user", key = "#redisRequest.testId", condition = "#redisRequest.testId != null && #redisRequest.testId < 10")
     public User getUserWithCache(RedisRequest redisRequest) {
 
         log.warn("------------- MOCK redis for {}", redisRequest);
