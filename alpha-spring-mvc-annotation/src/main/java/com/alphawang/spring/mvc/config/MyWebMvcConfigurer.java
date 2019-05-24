@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolExecutorFactoryBean;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -19,12 +21,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Executor;
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @EnableWebMvc 
  */
 @Configuration
 @EnableRedisCache
+@EnableAsync
 @EnableWebMvc
 public class MyWebMvcConfigurer implements WebMvcConfigurer {
 
@@ -63,6 +71,15 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(mediaTypes);
         mappingJackson2HttpMessageConverter.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
         converters.add(mappingJackson2HttpMessageConverter);
+    }
+
+    @Bean
+    public Executor loggerExecutor() {
+
+        return new ThreadPoolExecutor(2,
+            5,
+            1, TimeUnit.SECONDS,
+            new ArrayBlockingQueue<Runnable>(100), new ThreadPoolExecutor.CallerRunsPolicy());
     }
     
 }
