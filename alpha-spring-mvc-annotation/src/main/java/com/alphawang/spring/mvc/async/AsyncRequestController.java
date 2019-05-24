@@ -11,6 +11,8 @@ public class AsyncRequestController {
     
     @Autowired
     private RequestContext requestContext;
+    @Autowired
+    private AsyncRequestService asyncRequestService;
     
     @GetMapping("/mvc/async")
     public String test(HttpServletRequest request) {
@@ -20,6 +22,7 @@ public class AsyncRequestController {
         clientContext.setRequestContext(requestContext);
 
         System.out.println(Thread.currentThread().getName() + " - start async");
+        asyncRequestService.doService(clientContext);
         
         return "DONE";
     }
