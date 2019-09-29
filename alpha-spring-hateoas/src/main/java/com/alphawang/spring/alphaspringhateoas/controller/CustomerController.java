@@ -2,6 +2,7 @@ package com.alphawang.spring.alphaspringhateoas.controller;
 
 import com.alphawang.spring.alphaspringhateoas.dto.Customer;
 import com.alphawang.spring.alphaspringhateoas.service.CustomerService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
@@ -17,10 +18,24 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
     
+    @GetMapping
+    public List<Customer> getAll() {
+        List<Customer> customers = customerService.getAll();
+        customers.forEach(this::addCustomerLink);
+        
+        return customers;
+    }
+    
     @GetMapping("/{customerId}")
     public Customer getCustomerById(@PathVariable Long customerId) {
         Customer customer = customerService.getById(customerId);
-        
+
+        addCustomerLink(customer);
+
+        return customer;
+    }
+
+    private void addCustomerLink(Customer customer) {
         if (customer != null) {
             /**
              * "_links": {
@@ -35,8 +50,6 @@ public class CustomerController {
             Link link = ControllerLinkBuilder.linkTo(CustomerController.class).slash(customer.getCustomerId()).withSelfRel();
             customer.add(link);
         }
-
-        return customer;
     }
 
 }
