@@ -3,6 +3,8 @@ package com.alphawang.spring.alphaspringhateoas.controller;
 import com.alphawang.spring.alphaspringhateoas.dto.Customer;
 import com.alphawang.spring.alphaspringhateoas.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +19,24 @@ public class CustomerController {
     
     @GetMapping("/{customerId}")
     public Customer getCustomerById(@PathVariable Long customerId) {
-        return customerService.getById(customerId);
+        Customer customer = customerService.getById(customerId);
+        
+        if (customer != null) {
+            /**
+             * "_links": {
+             *   "self": {
+             *     "href": "http://localhost:8080/customers/100"
+             *   }
+             * }
+             */
+            // customer.add(new Link("http://localhost:8080/customers/" + id) );
+
+            // save as above.
+            Link link = ControllerLinkBuilder.linkTo(CustomerController.class).slash(customer.getCustomerId()).withSelfRel();
+            customer.add(link);
+        }
+
+        return customer;
     }
 
 }
