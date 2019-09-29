@@ -1,7 +1,12 @@
 package com.alphawang.spring.alphaspringhateoas.controller;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import com.alphawang.spring.alphaspringhateoas.dto.Customer;
+import com.alphawang.spring.alphaspringhateoas.dto.Order;
 import com.alphawang.spring.alphaspringhateoas.service.CustomerService;
+import com.alphawang.spring.alphaspringhateoas.service.OrderService;
+import com.sun.tools.corba.se.idl.constExpr.Or;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
@@ -21,7 +26,7 @@ public class CustomerController {
     @GetMapping
     public List<Customer> getAll() {
         List<Customer> customers = customerService.getAll();
-        customers.forEach(this::addCustomerLink);
+        customers.forEach(LinkBuilder::addCustomerLink);
         
         return customers;
     }
@@ -30,26 +35,11 @@ public class CustomerController {
     public Customer getCustomerById(@PathVariable Long customerId) {
         Customer customer = customerService.getById(customerId);
 
-        addCustomerLink(customer);
+        LinkBuilder.addCustomerLink(customer);
 
         return customer;
     }
 
-    private void addCustomerLink(Customer customer) {
-        if (customer != null) {
-            /**
-             * "_links": {
-             *   "self": {
-             *     "href": "http://localhost:8080/customers/100"
-             *   }
-             * }
-             */
-            // customer.add(new Link("http://localhost:8080/customers/" + id) );
 
-            // save as above.
-            Link link = ControllerLinkBuilder.linkTo(CustomerController.class).slash(customer.getCustomerId()).withSelfRel();
-            customer.add(link);
-        }
-    }
 
 }
