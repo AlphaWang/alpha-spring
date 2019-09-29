@@ -7,6 +7,7 @@ import com.alphawang.spring.alphaspringhateoas.service.OrderService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resources;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,12 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
-    
+
+    /**
+     * List is NOT ResourceSupport, 所以不能正常加入 `_links` 字段；只能加入 `links`；
+     * 可改用 Resources 包装。
+     * 
+     */
     @RequestMapping("/{customerId}")
     public List<Order> getCustomerOrders(@PathVariable Long customerId) {
         List<Order> orders = orderService.getCustomerOrders(customerId);
@@ -26,6 +32,16 @@ public class OrderController {
         orders.forEach(order -> LinkBuilder.addOrderLink(customerId, order));
         
         return orders;
+    }
+
+    @RequestMapping(value = "resources/{customerId}", produces = { "application/hal+json" })
+    public Resources<Order> getCustomerOrderResources(@PathVariable Long customerId) {
+        List<Order> orders = orderService.getCustomerOrders(customerId);
+
+        orders.forEach(order -> LinkBuilder.addOrderLink(customerId, order));
+        Link selfLink = LinkBuilder.buildOrdersLink(customerId);
+
+        return new Resources<>(orders, selfLink);
     }
     
     

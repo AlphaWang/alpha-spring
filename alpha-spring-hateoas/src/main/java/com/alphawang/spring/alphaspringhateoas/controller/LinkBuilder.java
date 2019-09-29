@@ -41,4 +41,9 @@ public class LinkBuilder {
         order.add(testLink);
     }
 
+    public static Link buildOrdersLink(Long customerId) {
+        Link selfLink = ControllerLinkBuilder.linkTo(methodOn(OrderController.class).getCustomerOrders(customerId)).withSelfRel();
+        return selfLink;
+    }
+
 }
