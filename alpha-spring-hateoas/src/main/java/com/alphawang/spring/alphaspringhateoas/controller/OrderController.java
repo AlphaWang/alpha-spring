@@ -1,14 +1,11 @@
 package com.alphawang.spring.alphaspringhateoas.controller;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
-
 import com.alphawang.spring.alphaspringhateoas.dto.Order;
 import com.alphawang.spring.alphaspringhateoas.service.OrderService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resources;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +38,8 @@ public class OrderController {
         orders.forEach(order -> LinkBuilder.addOrderLink(customerId, order));
         Link selfLink = LinkBuilder.buildOrdersLink(customerId);
 
-        return new Resources<>(orders, selfLink);
+        return new Resources<>(orders,   // `_embedded`
+                               selfLink); // `_links`
     }
     
     
